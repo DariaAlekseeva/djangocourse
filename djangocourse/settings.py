@@ -55,11 +55,12 @@ if DEBUG:
     INSTALLED_APPS += ["debug_toolbar"]
     MIDDLEWARE += ["debug_toolbar.middleware.DebugToolbarMiddleware"]
 
-    import socket
-    hostname, _, ips = socket.gethostbyname_ex(socket.gethostname())
-    INTERNAL_IPS = [ip[:-1] + "1" for ip in ips] + ["127.0.0.1"]
-    INTERNAL_IPS += ["192.168.65.1"]
- 
+    # Set INTERNAL_IPS for debug toolbar
+    INTERNAL_IPS = [
+        "127.0.0.1",
+        "localhost",
+        "192.168.65.1",
+    ]
 
 ROOT_URLCONF = "djangocourse.urls"
 
