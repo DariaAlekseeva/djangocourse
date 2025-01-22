@@ -2,6 +2,7 @@
 
 {% block content %}
     <h1>Edit Article</h1>
+    <p>Word count: {{ article.word_count }} word{{ article.word_count | pluralize}}.</p>
     <p>Last edited on {{ article.updated_at | date:"jS F Y"}}</p>
     <form method="POST">
         {% csrf_token %}
