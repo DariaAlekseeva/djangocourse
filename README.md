@@ -66,7 +66,7 @@ To run the application using Docker:
 
 ```bash
 docker build -t article-management .
-docker run -p 8000:8000 article-management
+docker run -p 8005:8000 article-management
 ```
 
 ## Project Structure

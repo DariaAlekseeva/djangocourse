@@ -1,4 +1,5 @@
 from django.contrib import admin
+from django.contrib.auth.admin import UserAdmin
 from app.models import Article, UserProfile 
 
 
@@ -10,6 +11,10 @@ class ArticleAdmin(admin.ModelAdmin):
     ordering = ("created_at",)
     readonly_fields = ("word_count", "created_at", "updated_at")
 
+
+class CustomUserAdmin(UserAdmin):
+    pass
+
 # Register your models here.
 admin.site.register(Article, ArticleAdmin)
-admin.site.register(UserProfile)
+admin.site.register(UserProfile, CustomUserAdmin)
