@@ -8,6 +8,9 @@ ENV PYTHONUNBUFFERED=1
 ENV POETRY_VIRTUALENVS_CREATE=false
 ENV POETRY_VIRTUALENVS_IN_PROJECT=false
 
+RUN apt update
+RUN apt install gettext -y
+
 # Create a directory for our application
 RUN mkdir /code
 
