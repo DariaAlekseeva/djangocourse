@@ -28,6 +28,7 @@ COPY pyproject.toml poetry.lock ./
 
 # Copy the rest of the application code
 COPY . .
+RUN chmod 755 /code/start-django.sh
 
 # Install project dependencies
 RUN poetry install --no-root
@@ -36,4 +37,4 @@ RUN poetry install --no-root
 EXPOSE 8000
 
 # Start the Django development server
-ENTRYPOINT [ "poetry",  "run", "python", "manage.py", "runserver", "0.0.0.0:8000" ]
+ENTRYPOINT [ "/code/start-django.sh" ]
