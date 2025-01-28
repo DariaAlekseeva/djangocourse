@@ -34,7 +34,7 @@ class Article(models.Model):
     title = models.CharField(_("title"), max_length=100)
     content = models.TextField(_("content"), blank=True, default="")
     word_count = models.IntegerField(_("word_count"), blank=True, default="")
-    twitter_post = models.TextField(_("twitter_post"), blank=True, default="")
+    twitter_post = models.TextField(_("twitter post"), blank=True, default="")
     status = models.CharField(
         _("status"), 
         max_length=20,
