@@ -1,10 +1,10 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from app.models import Article, UserProfile 
+from app.models import Article, UserProfile
 
 
 class ArticleAdmin(admin.ModelAdmin):
-    list_display = ("title", "word_count", "status", "created_at","updated_at")
+    list_display = ("title", "word_count", "status", "created_at", "updated_at")
     list_filter = ("status",)
     search_fields = ("title", "content")
     date_hierarchy = "created_at"
@@ -16,19 +16,20 @@ class CustomUserAdmin(UserAdmin):
     fieldsets = (
         (None, {"fields": ("email", "password")}),
         ("Personal info", {"fields": ("first_name", "last_name")}),
-        ("Permissions", {"fields": ("is_staff", "is_active", "is_superuser", "groups", "user_permissions")}),
+        ("Permissions", {"fields": ("is_active", "is_staff", "is_superuser", "groups", "user_permissions")}),
         ("Important dates", {"fields": ("last_login", "date_joined")})
     )
     add_fieldsets = (
         (None, {
             "classes": ("wide",),
-            "fields": ("email", "password1", "password2")}),
+            "fields": ("email", "password1", "password2")
+        }),
     )
     list_display = ("email", "is_staff", "is_active")
     list_filter = ("is_staff", "is_active")
-    search_fields = ("email",)
+    search_field = ("email",)
     ordering = ("email",)
 
-# Register your models here.
+
 admin.site.register(Article, ArticleAdmin)
 admin.site.register(UserProfile, CustomUserAdmin)

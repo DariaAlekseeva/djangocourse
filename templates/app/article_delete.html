@@ -1,8 +1,8 @@
-{% extends "app/base.html" %}
+{% extends "base.html" %}
 
-{% block content %}
+{% block base_content %}
 <main class="max-w-7xl mx-auto flex flex-col items-center mt-10">
-    <h1 class="subtitle mb-2">Delete Article</h1>
+    <h1 class="subtitle mb-2 text-4xl font-bold">Delete Article</h1>
     <p class="text-lg mb-6">Are you sure you want to delete "{{ article.title }}"?</p>
 
     <form method="POST" cclass="flex items-center gap-4">
@@ -12,4 +12,4 @@
     </form>
 
 </main>
-{% endblock content %}
+{% endblock base_content %}
