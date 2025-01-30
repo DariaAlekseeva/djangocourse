@@ -4,4 +4,6 @@
 __pycache__/
 .DS_Store
 node_modules/
-.env.docker
+.env.docker.venv/
+.venv/
+venv/
