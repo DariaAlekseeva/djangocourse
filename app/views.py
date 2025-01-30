@@ -1,4 +1,6 @@
 from typing import Any
+
+from django.contrib.messages.views import SuccessMessageMixin
 from django.db.models.query import QuerySet
 from django.shortcuts import render
 from django.urls import reverse_lazy
@@ -18,9 +20,14 @@ class ArticleListView(LoginRequiredMixin, ListView):
     template_name = "app/home.html"
     model = Article
     context_object_name = "articles"
+    paginate_by = 5
 
     def get_queryset(self) -> QuerySet[Any]:
-        return Article.objects.filter(creator=self.request.user).order_by("-created_at")
+        search =self.request.GET.get("search")
+        queryset = super().get_queryset().filter(creator=self.request.user)
+        if search:
+            queryset = queryset.filter(title__search=search)
+        return queryset.order_by("-created_at")
 
 class ArticleCreateView(LoginRequiredMixin, CreateView):
     template_name = "app/article_create.html"
@@ -45,10 +52,11 @@ class ArticleUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 
 
 
-class ArticleDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+class ArticleDeleteView(LoginRequiredMixin, UserPassesTestMixin, SuccessMessageMixin, DeleteView):
     template_name = "app/article_delete.html"
     model = Article
     success_url = reverse_lazy("home")
+    success_message = "Article deleted successfully"
     context_object_name = "article"  
 
     def test_func(self) -> bool | None:
