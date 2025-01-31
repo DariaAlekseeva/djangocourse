@@ -135,14 +135,14 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-DEFAULT_FROM_EMAIL = os.getenv("MAILGUN_EMAIL", "None")
+# DEFAULT_FROM_EMAIL = os.getenv("MAILGUN_EMAIL", "None")
 
-ANYMAIL = {
-    "MAILGUN_API_KEY": os.getenv("MAILGUN_API_KEY", "None"),
-    "SEND_DEFAULTS": {"tags": ["djangocourse"]}
-}
+# ANYMAIL = {
+#     "MAILGUN_API_KEY": os.getenv("MAILGUN_API_KEY", "None"),
+#     "SEND_DEFAULTS": {"tags": ["djangocourse"]}
+# }
 
-EMAIL_BACKEND = "anymail.backends.mailgun.EmailBackend"
+# EMAIL_BACKEND = "anymail.backends.mailgun.EmailBackend"
 
 LOGIN_REDIRECT_URL = "home"
 LOGOUT_REDIRECT_URL = "account_login"
