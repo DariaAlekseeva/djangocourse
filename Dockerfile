@@ -1,5 +1,5 @@
 # Use Python 3.12 with Debian Bullseye as the base image
-FROM python:3.12-bullseye
+FROM python:3.12-bullseye AS base
 
 # Prevents Python from buffering stdout and stderr (good for logging)
 ENV PYTHONUNBUFFERED=1
@@ -30,11 +30,21 @@ COPY pyproject.toml poetry.lock ./
 COPY . .
 RUN chmod 755 /code/start-django.sh
 
+
+FROM base AS development
 # Install project dependencies
 RUN poetry install --no-root
-
+RUN poetry run playwright install --with-deps
 # Expose port 8000 (note: this is just documentation)
 EXPOSE 8000
+# Start the Django development server
+ENTRYPOINT [ "/code/start-django.sh" ]
 
+
+FROM base AS production
+# Install project dependencies
+RUN poetry install --only main--no-root
+# Expose port 8000 (note: this is just documentation)
+EXPOSE 8000
 # Start the Django development server
 ENTRYPOINT [ "/code/start-django.sh" ]
